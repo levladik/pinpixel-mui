@@ -1,3 +1,20 @@
 .editor {
 	display: flex;
 }
+.styles-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.style-image {
+	width: 65px;
+	height: 65px;
+	border: 2px solid #1976d200;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: .3s;
+}
+.style-image:hover {
+	border: 2px solid #1976d2;
+}
+

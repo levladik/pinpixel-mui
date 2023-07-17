@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoibGV2bGFkaWsiLCJhIjoiY2ttbmtreXpsMDJuczJvbGZjbWk5a2N2diJ9.w50051-ckXCDXPYqgy-t1w";
 
-const Map = () => {
+export default function Map({ mapStyle }) {
+
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: "map",
-      style: "mapbox://styles/levladik/ckn5xz5420qrw17s6q2agidvw",
+      style: mapStyle,
     });
 
-    const nav = new mapboxgl.NavigationControl();
+	 const nav = new mapboxgl.NavigationControl();
+	  
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
@@ -25,8 +28,6 @@ const Map = () => {
   }, []);
 
   return (
-    <div id="map" style={{ width: '40vw', height: '90vw' }}></div>
+    <div id="map" style={{ width: '50vw', height: '100vh' }}></div>
   );
 };
-
-export default Map;

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import Editor from './components/Editor';
+import { ThemeProvider } from '@emotion/react';
+import theme from './themes/theme';
 
 function App() {
   return (
-	  <div className="App">
+	  <ThemeProvider theme={theme} className="App">
 		<Editor />
-    </div>
+    </ThemeProvider>
   );
 }
 
