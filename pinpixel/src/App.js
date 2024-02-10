@@ -6,7 +6,7 @@ import theme from './themes/theme';
 function App() {
   return (
 	  <ThemeProvider theme={theme} className="App">
-		<Editor />
+		  <Editor />
     </ThemeProvider>
   );
 }

@@ -37,8 +37,7 @@ export default function MapStyles({ changeStyle }) {
 			  alt="Map Style"
 			  src={newyork}
 			  onClick={() => changeStyle('newyork')}
-			  />
-		  
+			  />		  
     </div>
   );
 }

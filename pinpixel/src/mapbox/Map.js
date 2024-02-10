@@ -5,12 +5,16 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoibGV2bGFkaWsiLCJhIjoiY2ttbmtreXpsMDJuczJvbGZjbWk5a2N2diJ9.w50051-ckXCDXPYqgy-t1w";
 
-export default function Map({ mapStyle }) {
+export default function Map({ mapStyle, mapSize, mapCenter }) {
 
-  useEffect(() => {
+  const [width, height] = mapSize.split('*')
+
+	  useEffect(() => {
     const map = new mapboxgl.Map({
       container: "map",
       style: mapStyle,
+      zoom: 10,
+      center: mapCenter
     });
 
 	 const nav = new mapboxgl.NavigationControl();
@@ -25,9 +29,18 @@ export default function Map({ mapStyle }) {
 
     map.addControl(nav);
     map.addControl(geocoder);
-  }, []);
+  }, [mapStyle, mapSize]);
+
+  let mapWidth = 45;
+  let mapHeight;
+
+  mapHeight = mapSize === '21*30' ? mapWidth * (height / width)
+  : mapSize === '30*40' ? mapWidth * (height / width)
+  : mapSize === '40*50' ? mapWidth * (height / width)
+  : mapSize === '50*70' ? mapWidth * (height / width)
+  : 0;
 
   return (
-    <div id="map" style={{ width: '50vw', height: '100vh' }}></div>
+    <div id="map" style={{ margin: '0 auto', width: `${mapWidth}vw`, height: `${mapHeight}vw` }}></div>
   );
 };

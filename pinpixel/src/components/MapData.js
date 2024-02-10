@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
@@ -11,16 +11,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import MapStyles from './MapStyles';
 
-export default function MapData({ changeStyle }) {
-  
-  const [alignment, setAlignment] = useState('web');
-
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
+export default function MapData({ changeStyle, mapSize, handleChangeMapSize }) {  
 
   return (
-    <Box sx={{ width: '30vw', p: 2 }}>
+    <Box sx={{ width: '40%', p: 2 }}>
       <TextField label="Search any location" autoFocus={true} size="small" fullWidth/>
       <Divider sx={{ m: 2 }}>
           <Chip label="LABELS" color="primary" variant='outlined' />
@@ -42,11 +36,11 @@ export default function MapData({ changeStyle }) {
         </Divider>
         <Stack direction="row" justifyContent="center">
           <ToggleButtonGroup
-            color="primary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
+            color="primary"            
+            exclusive            
             aria-label="Size"
+            value={mapSize}
+            onChange={handleChangeMapSize}
           >
             <ToggleButton value="21*30">21*30</ToggleButton>
             <ToggleButton value="30*40">30*40</ToggleButton>
