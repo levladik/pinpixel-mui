@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
@@ -11,17 +11,24 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import MapStyles from './MapStyles';
 
-export default function MapData({ changeStyle, mapSize, handleChangeMapSize }) {  
-
+export default function MapData({ changeStyle, mapSize, handleChangeMapSize, searchValue, handleInputChange }) {  
+  
   return (
     <Box sx={{ width: '40%', p: 2 }}>
-      <TextField label="Search any location" autoFocus={true} size="small" fullWidth/>
+      <TextField 
+        label="Search any location" 
+        autoFocus={true} 
+        size="small" 
+        fullWidth
+        value={searchValue}
+        onChange={handleInputChange}/>
+
       <Divider sx={{ m: 2 }}>
-          <Chip label="LABELS" color="primary" variant='outlined' />
-        </Divider>
-        <TextField label="Title" size="small" margin='dense' fullWidth/>
-        <TextField label="Subtitle" size="small" margin='dense' fullWidth/>
-        <TextField label="Tagline" size="small" margin='dense' fullWidth/>
+        <Chip label="LABELS" color="primary" variant='outlined' />
+      </Divider>
+      <TextField label="Title" size="small" margin='dense' fullWidth/>
+      <TextField label="Subtitle" size="small" margin='dense' fullWidth/>
+      <TextField label="Tagline" size="small" margin='dense' fullWidth/>
 		  <FormGroup>
 				<FormControlLabel sx={{ mt: -1 }} control={<Switch defaultChecked />} label="Labels" labelPlacement="start"/>
 		  </FormGroup>

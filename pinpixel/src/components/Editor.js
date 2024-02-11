@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Map from '../mapbox/Map';
 import MapData from './MapData';
 import Stack from '@mui/material/Stack';
@@ -16,7 +16,12 @@ export default function Editor() {
 
 	const [mapSize, setMapSize] = useState('30*40');
 	const [mapStyle, setStyle] = useState(styles.piter);
-	const [mapCenter, setCenter] = useState([-73.935242, 40.730610])
+	const [mapCenter, setMapCenter] = useState([-73.935242, 40.730610])
+	const [searchValue, setSearchValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  }
 
 	const handleChangeMapSize = (event, newAlignment) => {
     setMapSize(newAlignment);
@@ -28,8 +33,22 @@ export default function Editor() {
 
 	return (
 		<Stack direction="row">
-			<MapData mapSize={ mapSize } changeStyle={ changeStyle } handleChangeMapSize={ handleChangeMapSize } />
-			<Map mapStyle={ mapStyle } mapSize={ mapSize } mapCenter={ mapCenter }/>
-	   </Stack>	 	
+
+			<MapData 
+				mapSize={ mapSize } 
+				changeStyle={ changeStyle } 
+				handleChangeMapSize={ handleChangeMapSize } 
+				searchValue={ searchValue } 
+				handleInputChange={ handleInputChange }
+			/>
+
+			<Map 
+				mapStyle={ mapStyle } 
+				mapSize={ mapSize } 
+				// mapCenter={ mapCenter }
+				searchValue={ searchValue }
+			/>
+
+	  </Stack>	 	
   );
 }
