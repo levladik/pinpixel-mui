@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import MapStyles from './MapStyles';
 
-export default function MapData({ changeStyle, mapSize, handleChangeMapSize, searchValue, handleInputChange }) {  
+export default function MapData({ changeStyle, mapSize, handleChangeMapSize, handleInputChange }) {  
   
   return (
     <Box sx={{ width: '40%', p: 2 }}>
@@ -20,7 +20,6 @@ export default function MapData({ changeStyle, mapSize, handleChangeMapSize, sea
         autoFocus={true} 
         size="small" 
         fullWidth
-        value={searchValue}
         onChange={handleInputChange}/>
 
       <Divider sx={{ m: 2 }}>
