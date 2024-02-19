@@ -10,17 +10,18 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import MapStyles from './MapStyles';
+import { SearchBox } from '@mapbox/search-js-react';
+import { accessToken } from 'mapbox-gl';
 
-export default function MapData({ changeStyle, mapSize, handleChangeMapSize, handleInputChange }) {  
+export default function MapData({ accessToken, map, changeStyle, mapSize, handleChangeMapSize }) {  
   
   return (
     <Box sx={{ width: '40%', p: 2 }}>
-      <TextField 
-        label="Search any location" 
-        autoFocus={true} 
-        size="small" 
-        fullWidth
-        onChange={handleInputChange}/>
+      <SearchBox 
+        accessToken={accessToken} 
+        map={map}
+        placeholder={'Enter your city'}
+      />
 
       <Divider sx={{ m: 2 }}>
         <Chip label="LABELS" color="primary" variant='outlined' />
