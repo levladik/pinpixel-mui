@@ -20,4 +20,12 @@
 .style-image:hover {
 	border: 2px solid #1976d2;
 }
+.css-1qypi7k-MuiFormLabel-root-MuiInputLabel-root {
+	top: -10px !important;
+}
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right,
+.mbx06a87095--ResultsAttribution	 {
+	display: none !important;
+}
 

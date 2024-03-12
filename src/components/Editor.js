@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Map from '../mapbox/Map';
 import MapData from './MapData';
 import Stack from '@mui/material/Stack';
@@ -18,31 +18,36 @@ const styles = {
 	lisbon: 'mapbox://styles/levladik/ckw3o3cmm2nyz14nyhwj428nf',
 }
 
-const useMap = (mapStyle, mapSize, searchValue) => {
-	const [mapCenter, setMapCenter] = useState([-73.935242, 40.730610]);
+const useMap = (mapStyle, mapSize, mapCenter, handleChangeMapCenter) => {
 	const [map, setMap] = useState(null);
-
+	const [zoom, setZoom] = useState(12);
+	
 	useEffect(() => {
 		const mapInstance = new mapboxgl.Map({
 			container: "map",
 			style: mapStyle,
-			zoom: 8.8,
+			zoom: zoom,
 			center: mapCenter,
 		});
 
 		const nav = new mapboxgl.NavigationControl();
 		
-		const geocoder = new MapboxGeocoder({
-			accessToken: mapboxgl.accessToken,
-			mapboxgl: mapboxgl,
-			autocomplete: false,
-			marker: false,
-			limit: 10,
-			type: 'city'
-		});
+		// const geocoder = new MapboxGeocoder({
+		// 	accessToken: mapboxgl.accessToken,
+		// 	mapboxgl: mapboxgl,
+		// 	autocomplete: true,
+		// 	marker: false,
+		// 	limit: 3,
+		// 	types: 'place'
+		// });
+
+		mapInstance.on('moveend', () => {
+			setZoom(mapInstance.getZoom()); 
+			handleChangeMapCenter(mapInstance.getCenter());
+		})
 	
 		mapInstance.addControl(nav);
-		mapInstance.addControl(geocoder);
+		// mapInstance.addControl(geocoder);
 
 		setMap(mapInstance);
 		
@@ -53,8 +58,8 @@ const useMap = (mapStyle, mapSize, searchValue) => {
 
 export default function Editor() {
 	const [mapSize, setMapSize] = useState('30*40');
-	const [mapStyle, setStyle] = useState(styles.piter);
-	const [searchValue, setSearchValue] = useState('Paris');
+	const [mapStyle, setStyle] = useState(styles.lisbon);
+	const [mapCenter, setMapCenter] = useState([-73.958428, 40.747783]);
 
 	const handleChangeMapSize = (event, newAlignment) => {
 		setMapSize(newAlignment);
@@ -64,7 +69,11 @@ export default function Editor() {
 		setStyle(styles[styleName]);
 	};
 
-	const map = useMap(mapStyle, mapSize, searchValue);
+	const handleChangeMapCenter = (coordinates) => {
+		setMapCenter(coordinates);
+  }	
+	
+	const map = useMap(mapStyle, mapSize, mapCenter, handleChangeMapCenter);
 
 	return (
 		<Stack direction="row">
@@ -74,6 +83,7 @@ export default function Editor() {
 				mapSize={ mapSize } 
 				changeStyle={ changeStyle } 
 				handleChangeMapSize={ handleChangeMapSize }
+				handleChangeMapCenter={ handleChangeMapCenter }
 			/>
 			<Map 
 				mapSize={ mapSize } 

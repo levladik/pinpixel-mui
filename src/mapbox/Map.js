@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 export default function Map({ mapSize }) {
