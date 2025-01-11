@@ -32,14 +32,14 @@ const useMap = (mapStyle, mapSize, mapCenter, handleChangeMapCenter) => {
 
 		const nav = new mapboxgl.NavigationControl();
 		
-		// const geocoder = new MapboxGeocoder({
-		// 	accessToken: mapboxgl.accessToken,
-		// 	mapboxgl: mapboxgl,
-		// 	autocomplete: true,
-		// 	marker: false,
-		// 	limit: 3,
-		// 	types: 'place'
-		// });
+		const geocoder = new MapboxGeocoder({
+			accessToken: mapboxgl.accessToken,
+			mapboxgl: mapboxgl,
+			autocomplete: true,
+			marker: false,
+			limit: 3,
+			types: 'place'
+		});
 
 		mapInstance.on('moveend', () => {
 			setZoom(mapInstance.getZoom()); 

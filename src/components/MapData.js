@@ -11,21 +11,28 @@ import Switch from '@mui/material/Switch';
 import MapStyles from './MapStyles';
 import { SearchBox } from '@mapbox/search-js-react';
 
-export default function MapData({ accessToken, map, changeStyle, mapSize, handleChangeMapSize, handleChangeMapCenter }) {  
+export default function MapData({ 
+  accessToken, 
+  map, 
+  changeStyle, 
+  mapSize, 
+  handleChangeMapSize, 
+  handleChangeMapCenter 
+}) {  
   
   return (
     <Box sx={{ width: '40%', p: 2 }}>
       <SearchBox
         options={{
           types: 'place',
+          zoom: 12
           }}
         accessToken={accessToken} 
         map={map}
         value=''
         placeholder='Enter your city'
         onRetrieve={(response) => {
-          console.log(response.features[1].geometry.coordinates);
-          handleChangeMapCenter(response.features[0].geometry.coordinates);
+          // handleChangeMapCenter(response.features[0].geometry.coordinates);
         }}
       />
 
@@ -65,10 +72,10 @@ export default function MapData({ accessToken, map, changeStyle, mapSize, handle
           value={mapSize}
           onChange={handleChangeMapSize}
         >
-          <ToggleButton value="21*30">21*30</ToggleButton>
-          <ToggleButton value="30*40">30*40</ToggleButton>
-          <ToggleButton value="40*50">40*50</ToggleButton>
-          <ToggleButton value="50*70">50*70</ToggleButton>
+          <ToggleButton value="21*30">21 × 30 cm</ToggleButton>
+          <ToggleButton value="30*40">30 × 40 cm</ToggleButton>
+          <ToggleButton value="40*50">40 × 50 cm</ToggleButton>
+          <ToggleButton value="50*70">50 × 70 cm</ToggleButton>
         </ToggleButtonGroup>
       </Stack>
     </Box>
